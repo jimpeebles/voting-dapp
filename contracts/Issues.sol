@@ -33,7 +33,12 @@ contract Issues {
     emit VoteCast(msg.sender, _issueId, _choice);
   }
 
-  function hasVoted(uint _issueId) internal returns (bool) {
-    //Check if voter has already voted on a given issue
+  function canVoteOnIssue(uint _issueId) public view returns (bool) {
+    for (uint i = 0; i < votes.length; i++) {
+            if (votes[i].voter == msg.sender && votes[i].issueId == _issueId) {
+                return false;
+            }
+        }
+      return true;
   }
 }
