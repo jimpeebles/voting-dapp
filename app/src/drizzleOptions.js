@@ -13,7 +13,7 @@ const options = {
   contracts: [Issues],
   events: {
     // monitor Issues.VoteCast events
-    SimpleStorage: ["VoteCast"]
+    Issues: ["VoteCast", "IssueCreated"]
   },
   polls: {
     // check accounts ever 15 seconds
