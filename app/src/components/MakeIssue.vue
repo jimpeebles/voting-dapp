@@ -18,6 +18,7 @@
         <li v-for="(choice, index) in choices" :key="index">{{ choice }}</li>
       </ol>
     </div>
+    <button>Add Issue</button>
   </section>
 </template>
 
