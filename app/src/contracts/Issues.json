@@ -1,0 +1,110 @@
+{
+  "contractName": "Issues",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/jameskehoe/code/tuts/testing/contracts/Issues.sol\":\"Issues\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/jameskehoe/code/tuts/testing/contracts/Issues.sol\":{\"keccak256\":\"0x308bd7ae8c8c65e584703ad2eee8b05b09ea4873c528799bcc6a6dba04446ee2\",\"urls\":[\"bzzr://08e17fba7dd59a54f99a17032ebb7b36e43a94f8333fa2f2509f15631be91845\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a7230582010a77447d5d27947fa5a8ec11a45a771e347c09789e5244030582a2a882de9710029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a7230582010a77447d5d27947fa5a8ec11a45a771e347c09789e5244030582a2a882de9710029",
+  "sourceMap": "34:22:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;34:22:0;;;;;;;",
+  "deployedSourceMap": "34:22:0:-;;;;;",
+  "source": "pragma solidity >=0.4.21 <0.6.0;\n\ncontract Issues {\n  \n}\n",
+  "sourcePath": "/Users/jameskehoe/code/tuts/testing/contracts/Issues.sol",
+  "ast": {
+    "absolutePath": "/Users/jameskehoe/code/tuts/testing/contracts/Issues.sol",
+    "exportedSymbols": {
+      "Issues": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "Issues",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "34:22:0"
+      }
+    ],
+    "src": "0:57:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jameskehoe/code/tuts/testing/contracts/Issues.sol",
+    "exportedSymbols": {
+      "Issues": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "Issues",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "34:22:0"
+      }
+    ],
+    "src": "0:57:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.8+commit.23d335f2.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.10",
+  "updatedAt": "2019-07-09T10:49:27.433Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
