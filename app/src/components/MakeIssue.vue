@@ -1,26 +1,26 @@
 <template>
-  <section>
+  <section v-if="isDrizzleInitialized">
     <h2>Create An Issue</h2>
-    <form v-if="isDrizzleInitialized">
-      <textarea
-        name="issueText"
-        cols="50"
-        rows="10"
-        placeholder="What color should the city paint the bike shed?"
-      >
-      </textarea>
-      <h2>Add Choices</h2>
-      <div class="add-choice">
-        <input type="text" v-model="choiceInput" placeholder="Red" />
-        <button @click="addChoice">Add</button>
-      </div>
-      <div class="choices">
-        <ol>
-          <li v-for="(choice, index) in choices" :key="index">{{ choice }}</li>
-        </ol>
-      </div>
-      <button>Add Issue</button>
-    </form>
+
+    <textarea
+      name="issueText"
+      cols="50"
+      rows="10"
+      placeholder="What color should the city paint the bike shed?"
+      v-model="issueText"
+    >
+    </textarea>
+    <h2>Add Choices</h2>
+    <div class="add-choice">
+      <input type="text" v-model="choiceInput" placeholder="Red" />
+      <button @click="addChoice">Add</button>
+    </div>
+    <div class="choices">
+      <ol>
+        <li v-for="(choice, index) in choices" :key="index">{{ choice }}</li>
+      </ol>
+    </div>
+    <button @click.prevent="submitIssue">Add Issue</button>
   </section>
 </template>
 
@@ -31,8 +31,18 @@ export default {
   data() {
     return {
       choiceInput: "",
-      choices: []
+      choices: [],
+      contractName: "Issues",
+      contractMethod: "createIssue",
+      issueText: ""
     };
+  },
+  computed: {
+    ...mapGetters("drizzle", ["drizzleInstance", "isDrizzleInitialized"]),
+
+    utils() {
+      return this.drizzleInstance.web3.utils;
+    }
   },
   methods: {
     addChoice() {
@@ -40,11 +50,20 @@ export default {
       this.choiceInput = "";
     },
     submitIssue() {
-      // Submit to blockchain
+      // Convert data to bytes
+      const convertedIssue = this.utils.toHex(this.issueText);
+      const convertedChoices = this.choices.map(choice =>
+        this.utils.toHex(choice)
+      );
+
+      // Construct arguments
+      const sendArgs = [convertedIssue, convertedChoices];
+
+      // Send
+      this.drizzleInstance.contracts[this.contractName].methods[
+        this.contractMethod
+      ].cacheSend(...sendArgs);
     }
-  },
-  computed: {
-    ...mapGetters("drizzle", ["isDrizzleInitialized"])
   }
 };
 </script>
