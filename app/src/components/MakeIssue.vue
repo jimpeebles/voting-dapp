@@ -20,7 +20,7 @@
         <li v-for="(choice, index) in choices" :key="index">{{ choice }}</li>
       </ol>
     </div>
-    <button @click.prevent="submitIssue">Add Issue</button>
+    <button @click.prevent="submitIssue">Create Issue</button>
   </section>
 </template>
 
