@@ -5,29 +5,29 @@ contract Issues {
   Vote[] public votes;
   uint issueCount = 0;
 
-  event VoteCast(address voter, uint issueId, string choice);
-  event IssueCreated(address creator, string issue, bytes32[] choices);
+  event VoteCast(address voter, uint issueId, bytes32 choice);
+  event IssueCreated(address creator, bytes32 issue, bytes32[] choices);
 
   struct Issue {
     uint issueId;
-    string issue;
+    bytes32 issue;
     bytes32[] choices;
   }
 
   struct Vote {
     uint issueId;
     address voter;
-    string choice;
+    bytes32 choice;
   }
 
-  function createIssue(string memory _issue, bytes32[] memory _choices) public {
+  function createIssue(bytes32 _issue, bytes32[] memory _choices) public {
     Issue memory issue = Issue(issueCount, _issue, _choices);
     issues.push(issue);
     issueCount++;
     emit IssueCreated(msg.sender, _issue, _choices);
   }
 
-  function castVote(string memory _choice, uint _issueId) public {
+  function castVote(bytes32 _choice, uint _issueId) public {
     Vote memory vote = Vote(_issueId, msg.sender, _choice);
     votes.push(vote);
     emit VoteCast(msg.sender, _issueId, _choice);

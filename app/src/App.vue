@@ -8,10 +8,16 @@
 <script>
 import MakeIssue from "@/components/MakeIssue";
 import ViewIssues from "@/components/ViewIssues";
+import { mapGetters } from "vuex";
+
 export default {
+  name: "App",
   components: {
     MakeIssue,
     ViewIssues
+  },
+  computed: {
+    ...mapGetters("drizzle", ["isDrizzleInitialized"])
   }
 };
 </script>
