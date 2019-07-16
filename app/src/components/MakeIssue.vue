@@ -5,7 +5,7 @@
     <textarea
       name="issueText"
       cols="50"
-      rows="10"
+      rows="6"
       placeholder="What color should the city paint the bike shed?"
       v-model="issueText"
     >
@@ -20,7 +20,7 @@
         <li v-for="(choice, index) in choices" :key="index">{{ choice }}</li>
       </ol>
     </div>
-    <button @click.prevent="submitIssue">Create Issue</button>
+    <button id="submitIssue" @click.prevent="submitIssue">Create Issue</button>
   </section>
 </template>
 
@@ -82,6 +82,7 @@ export default {
   outline: none;
   border: none;
   box-shadow: none;
+  font-size: 1.2em;
 }
 .add-choice button:hover {
   cursor: pointer;
@@ -95,11 +96,41 @@ export default {
   border-left: 1px solid grey;
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
+  font-size: 1.2em;
+}
+
+ol,
+li {
+  list-style: none;
+  font-size: 1.2em;
+}
+ol {
+  padding: 0;
+}
+
+textarea {
+  font-size: 1.2em;
+  padding: 0.5rem;
 }
 .choices {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  text-align: left;
+  text-align: center;
   margin: 0 auto;
+}
+
+#submitIssue {
+  padding: 11px 30px;
+  font-weight: 600;
+  background-color: cornflowerblue;
+  color: white;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  font-size: 1.2em;
+}
+#submitIssue:hover {
+  cursor: pointer;
+  background-color: darkslategray;
 }
 </style>
