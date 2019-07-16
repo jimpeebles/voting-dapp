@@ -27,6 +27,14 @@ contract Issues {
     emit IssueCreated(msg.sender, _issue, _choices);
   }
 
+  function getIssueCount() public view returns (uint) {
+    return issues.length;
+  }
+
+  function getIssue(uint _id) public view returns (bytes32 _issue, bytes32[] memory choices) {
+    return (issues[_id].issue, issues[_id].choices);
+  }
+
   function castVote(bytes32 _choice, uint _issueId) public {
     Vote memory vote = Vote(_issueId, msg.sender, _choice);
     votes.push(vote);
