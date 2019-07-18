@@ -1,11 +1,21 @@
 <template>
   <section>
-    <div class="issue-container"></div>
+    <drizzle-contract
+      contractName="Issues"
+      method="getIssue"
+      :methodArgs="args"
+    />
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      args: [0]
+    };
+  }
+};
 </script>
 
 <style>

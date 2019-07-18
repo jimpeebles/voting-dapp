@@ -28,7 +28,7 @@ contract Issues {
   }
 
   function getIssueCount() public view returns (uint) {
-    return issues.length;
+    return issueCount;
   }
 
   function getIssue(uint _id) public view returns (bytes32 _issue, bytes32[] memory choices) {
