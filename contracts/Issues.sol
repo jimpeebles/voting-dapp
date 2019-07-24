@@ -28,7 +28,7 @@ contract Issues {
     return (issues[_id].issueText, issues[_id].choices);
   }
 
-  function castVote(bytes32 _choice, uint _issueId) public {
+  function castVote(bytes32 _choice, uint _issueId) public canVote(_issueId) {
     issues[_issueId].votes[msg.sender] = _choice;
     emit VoteCast(msg.sender, _issueId, _choice);
   }
