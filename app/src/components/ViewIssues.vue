@@ -1,10 +1,6 @@
 <template>
   <section>
-    <drizzle-contract
-      contractName="Issues"
-      method="getIssue"
-      :methodArgs="args"
-    />
+    <drizzle-contract contractName="Issues" method="getIssueCount" />
   </section>
 </template>
 
