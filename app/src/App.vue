@@ -1,8 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="isDrizzleInitialized">
     <make-issue />
     <view-issues />
   </div>
+  <div v-else>Loading App</div>
 </template>
 
 <script>
