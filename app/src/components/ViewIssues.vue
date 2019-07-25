@@ -26,7 +26,7 @@ export default {
         }
       ],
       contractName: "Issues",
-      getIssueCountMethod: "getIssueCount",
+      method: "getIssueCount",
       methodArgs: []
     };
   },
@@ -36,7 +36,7 @@ export default {
     issueCount() {
       const arg = {
         contract: this.contractName,
-        method: this.getIssueCountMethod
+        method: this.method
       };
       let count = this.getContractData(arg);
       return count;
@@ -44,13 +44,12 @@ export default {
   },
 
   created() {
-    const { contractName, getIssueCountMethod } = this;
-    const args = "";
-    console.log(args);
+    const { contractName, method, methodArgs } = this;
+
     this.$store.dispatch("drizzle/REGISTER_CONTRACT", {
       contractName,
-      getIssueCountMethod,
-      args
+      method,
+      methodArgs
     });
   }
 };
