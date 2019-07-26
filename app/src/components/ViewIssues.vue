@@ -172,6 +172,7 @@ export default {
   margin: 1rem;
   box-sizing: border-box;
 }
+
 ul {
   padding: 0;
 }
