@@ -145,11 +145,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.choices {
-  position: relative;
-  z-index: 1;
-  font-size: 1.2em;
+  font-weight: bold;
 }
 .choiceBg {
   position: absolute;
@@ -193,6 +189,9 @@ textarea {
   text-align: center;
   margin: 0 auto;
   color: #fff;
+  position: relative;
+  z-index: 1;
+  font-size: 1.2em;
 }
 
 .issuehero {
@@ -204,6 +203,14 @@ textarea {
     font-size: 1.5em;
     font-weight: bold;
     margin: 15px 0px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .issuehero {
+    grid-template-columns: 1fr;
+  }
+  .right {
+    min-height: 200px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="issueCount">Total Issues: {{ issueCount }}</div>
+    <div class="issueCount">Vote On Issues</div>
     <div class="choiceDisplay">
       <div
         v-for="(issue, id) in issueList"
@@ -159,10 +159,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .title {
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: bold;
+  color: rgba(100, 48, 150, 1);
 }
 .issueContainer {
   display: flex;
@@ -171,21 +172,26 @@ export default {
 .choiceDisplay {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 .issueCard {
   display: inline-block;
   width: 100%;
   max-width: 300px;
   min-height: 300px;
-  box-shadow: 0 0 5px 0 grey;
+  box-shadow: 0 0 5px 5px rgba(100, 48, 150, 0.1);
   padding: 20px;
   margin: 1rem;
   box-sizing: border-box;
+  border-radius: 4px;
 }
 .issueCount {
-  margin: 20px;
+  margin: 30px 0 20px;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 2em;
+  width: 100%;
+  color: #000;
 }
 
 ul {
@@ -199,6 +205,7 @@ li {
 .choicebox {
   display: flex;
   text-align: left;
+  font-weight: bold;
 }
 .choice-titles {
   opacity: 0.5;
