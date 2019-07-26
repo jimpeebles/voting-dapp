@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="issueCount">{{ issueCount }} Issues</div>
+    <div class="issueCount">{{ issueCount }} {{ issueCountTitle }}</div>
     <div class="choiceDisplay">
       <div
         v-for="(issue, id) in issueList"
@@ -55,6 +55,9 @@ export default {
       };
       let count = this.getContractData(arg);
       return count;
+    },
+    issueCountTitle() {
+      return this.issueCount == 1 ? "Issue" : "Issues";
     },
     issueData() {
       const arg = {
