@@ -1,16 +1,16 @@
 <template>
   <section>
     <div>Issues: {{ issueCount }}</div>
-    <div v-for="(row, index) in issueData" :key="index" class="issueCard">
-      <div class="title">{{ utils.toUtf8(row) }}</div>
+    <div v-for="(issue, index) in issueList" :key="index" class="issueCard">
+      <div class="title">{{ issue.title }}</div>
       <ul>
-        <li
+        <!-- <li
           v-for="(r, i) in utils.toUtf8(choiceData[index]).split(',')"
           :key="i"
           @click="castVote(r, index)"
         >
           {{ r }}
-        </li>
+        </li> -->
       </ul>
     </div>
   </section>
@@ -24,7 +24,8 @@ export default {
     return {
       contractName: "Issues",
       method: "getIssueCount",
-      methodArgs: []
+      methodArgs: [],
+      issueList: []
     };
   },
   computed: {
@@ -65,6 +66,20 @@ export default {
       };
       let votes = this.getContractData(arg);
       return votes;
+    }
+  },
+  watch: {
+    issueData(data) {
+      if (typeof data === "object") {
+        data.forEach((issue, index) => {
+          if (this.issueList[index] === undefined) {
+            this.issueList[index] = new Object();
+            this.issueList[index].title = this.utils.toUtf8(issue);
+          } else {
+            this.issueList[index].title = this.utils.toUtf8(issue);
+          }
+        });
+      }
     }
   },
   methods: {

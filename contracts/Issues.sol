@@ -47,10 +47,6 @@ contract Issues {
     return (ids, voters, vchoices);
   }
 
-  // function getIssue(uint _id) public view returns (bytes32 _issue, bytes32[] memory choices) {
-  //   return (issueArray[_id].issueText, issueArray[_id].choices);
-  // }
-
   function castVote(bytes32 _choice, uint _issueId) public {
     Vote memory vote = Vote(_issueId, msg.sender, _choice);
     votes.push(vote);
