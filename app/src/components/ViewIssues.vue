@@ -1,16 +1,16 @@
 <template>
   <section>
     <div>Issues: {{ issueCount }}</div>
-    <div v-for="(issue, index) in issueList" :key="index" class="issueCard">
+    <div v-for="(issue, id) in issueList" :key="id" class="issueCard">
       <div class="title">{{ issue.title }}</div>
       <ul>
-        <!-- <li
-          v-for="(r, i) in utils.toUtf8(choiceData[index]).split(',')"
+        <li
+          v-for="(choice, i) in issue.choices"
           :key="i"
-          @click="castVote(r, index)"
+          @click="castVote(choice, id)"
         >
-          {{ r }}
-        </li> -->
+          {{ choice }}
+        </li>
       </ul>
     </div>
   </section>
@@ -80,6 +80,32 @@ export default {
           }
         });
       }
+    },
+    choiceData(data) {
+      if (typeof data === "object") {
+        data.forEach((choice, index) => {
+          let choiceAr = this.utils.toUtf8(choice).split(",");
+          this.issueList[index].choices = choiceAr;
+        });
+      }
+    },
+    votes(data) {
+      console.log(data);
+      if (typeof data === "object") {
+        let ids = data[0];
+        let choices = data[2];
+
+        for (let i = 0; i < ids.length; i++) {
+          if (this.issueList[ids[i]].votes === undefined) {
+            this.issueList[ids[i]].votes = new Object();
+          }
+          let choice = this.utils.toUtf8(choices[i]);
+          if (this.issueList[ids[i]].votes[choice] === undefined) {
+            this.issueList[ids[i]].votes[choice] = 0;
+          }
+          this.issueList[ids[i]].votes[choice] += 1;
+        }
+      }
     }
   },
   methods: {
@@ -93,10 +119,8 @@ export default {
     },
     castVote(choice, issueId) {
       const convertedChoice = this.utils.toHex(choice);
-
       // Construct arguments
       const sendArgs = [convertedChoice, issueId];
-
       // Send
       this.drizzleInstance.contracts[this.contractName].methods[
         "castVote"
