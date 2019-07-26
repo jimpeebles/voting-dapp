@@ -47,14 +47,20 @@ contract Issues {
     return (ids, voters, vchoices);
   }
 
-  function castVote(bytes32 _choice, uint _issueId) public {
+  function castVote(bytes32 _choice, uint _issueId) public canVote(_issueId) {
     Vote memory vote = Vote(_issueId, msg.sender, _choice);
     votes.push(vote);
     emit VoteCast(msg.sender, _issueId, _choice);
   }
 
-  // modifier canVote (uint _issueId) {
-  //   require(issues[_issueId].votes[msg.sender] == 0, "You've already voted on this issue.");
-  //   _;
-  // }
+  modifier canVote (uint _issueId) {
+    bool voted = false;
+    for(uint i = 0; i < votes.length; i++) {
+      if(votes[i].issueId == _issueId && votes[i].voter == msg.sender){
+        voted = true;
+      }
+    }
+    require(voted == false, "You've already voted on this issue.");
+    _;
+  }
 }

@@ -3,7 +3,7 @@
     <make-issue />
     <view-issues />
   </div>
-  <div v-else>Loading App</div>
+  <div class="loading" v-else>Loading Issues</div>
 </template>
 
 <script>
@@ -30,5 +30,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.loading {
+  height: 100vh;
+  font-size: 3em;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

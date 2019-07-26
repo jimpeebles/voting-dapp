@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="issueCount">Vote On Issues</div>
+    <div class="issueCount">{{ issueCount }} Issues</div>
     <div class="choiceDisplay">
       <div
         v-for="(issue, id) in issueList"
@@ -15,7 +15,7 @@
             <div class="tally">Votes</div>
           </div>
           <div
-            class="choicebox"
+            class="choicebox choice-item"
             v-for="(key, value) in issue.choices"
             :key="value"
             @click="castVote($event, value)"
@@ -214,8 +214,8 @@ li {
 .choice {
   flex: 1;
 }
-.choice:hover {
-  color: blue;
+.choice-item:hover {
+  color: rgba(100, 48, 150, 1);
   cursor: pointer;
 }
 .tally {
