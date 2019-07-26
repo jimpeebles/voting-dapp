@@ -50,11 +50,11 @@ export default {
       this.choiceInput = "";
     },
     submitIssue() {
+      // Make choices into string
+      const stringChoices = this.choices.join();
+      const convertedChoices = this.utils.toHex(stringChoices);
       // Convert data to bytes
       const convertedIssue = this.utils.toHex(this.issueText);
-      const convertedChoices = this.choices.map(choice =>
-        this.utils.toHex(choice)
-      );
 
       // Construct arguments
       const sendArgs = [convertedIssue, convertedChoices];
