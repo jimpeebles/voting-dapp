@@ -92,7 +92,6 @@ export default {
       if (typeof data === "object") {
         data.forEach((choice, index) => {
           let choiceAr = this.utils.toUtf8(choice).split(",");
-          //this.issueList[index].choices = choiceAr;
           choiceAr.forEach(c => {
             if (this.issueList[index].choices === undefined) {
               this.issueList[index].choices = new Object();
@@ -110,12 +109,16 @@ export default {
     votes(data) {
       if (typeof data === "object") {
         let ids = data[0];
-        let choices = data[2];
-
-        for (let i = 0; i < ids.length; i++) {
-          let choice = this.utils.toUtf8(choices[i]);
+        let hexChoices = data[2];
+        let choices = hexChoices.map(choice => {
+          return this.utils.toUtf8(choice);
+        });
+        choices.forEach((choice, i) => {
+          this.issueList[ids[i]].choices[choice] = 0;
+        });
+        choices.forEach((choice, i) => {
           this.issueList[ids[i]].choices[choice] += 1;
-        }
+        });
       }
     }
   },
