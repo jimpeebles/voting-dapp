@@ -29,9 +29,10 @@
         <button
           class="button is-white is-large is-outlined"
           id="submitIssue"
+          :disabled="creating"
           @click.prevent="submitIssue"
         >
-          Create Issue
+          {{ createButtonText }}
         </button>
       </div>
       <div class="right">
@@ -45,20 +46,27 @@
         </div>
       </div>
     </div>
+    <toast />
   </section>
+  <section v-else>Loading...</section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import Toast from "./Toast";
 
 export default {
+  components: {
+    Toast
+  },
   data() {
     return {
       choiceInput: "",
       choices: [],
       contractName: "Issues",
       contractMethod: "createIssue",
-      issueText: ""
+      issueText: "",
+      creating: false
     };
   },
   computed: {
@@ -66,6 +74,9 @@ export default {
 
     utils() {
       return this.drizzleInstance.web3.utils;
+    },
+    createButtonText() {
+      return this.creating ? "Creating..." : "Create Issue";
     }
   },
   methods: {
@@ -74,6 +85,7 @@ export default {
       this.choiceInput = "";
     },
     submitIssue() {
+      this.creating = true;
       // Make choices into string
       const stringChoices = this.choices.join();
       const convertedChoices = this.utils.toHex(stringChoices);
@@ -87,12 +99,21 @@ export default {
       this.drizzleInstance.contracts[this.contractName].methods[
         this.contractMethod
       ].cacheSend(...sendArgs);
-
-      // Reset fields
+    },
+    clearForm() {
       this.choiceInput = "";
       this.choices = [];
       this.issueText = "";
     }
+  },
+  mounted() {
+    this.$drizzleEvents.$on("drizzle/contractEvent", payload => {
+      const { eventName } = payload;
+      if (eventName === "IssueCreated") {
+        this.creating = false;
+        this.clearForm();
+      }
+    });
   }
 };
 </script>
@@ -124,6 +145,11 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.choices {
+  position: relative;
+  z-index: 1;
+  font-size: 1.2em;
 }
 .choiceBg {
   position: absolute;
