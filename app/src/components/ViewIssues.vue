@@ -1,22 +1,28 @@
 <template>
   <section>
-    <div>Issues: {{ issueCount }}</div>
-    <div
-      v-for="(issue, id) in issueList"
-      :key="id"
-      class="issueCard"
-      :data-id="id"
-    >
-      <div class="title">{{ issue.title }}</div>
-      <div class="choices">
-        <div
-          class="choicebox"
-          v-for="(key, value) in issue.choices"
-          :key="value"
-          @click="castVote($event, value)"
-        >
-          <div class="choice">{{ value }}</div>
-          <div class="tally">{{ key }}</div>
+    <div class="issueCount">Total Issues: {{ issueCount }}</div>
+    <div class="choiceDisplay">
+      <div
+        v-for="(issue, id) in issueList"
+        :key="id"
+        class="issueCard"
+        :data-id="id"
+      >
+        <div class="title">{{ issue.title }}</div>
+        <div class="choices">
+          <div class="choicebox choice-titles">
+            <div class="choice">Choices</div>
+            <div class="tally">Votes</div>
+          </div>
+          <div
+            class="choicebox"
+            v-for="(key, value) in issue.choices"
+            :key="value"
+            @click="castVote($event, value)"
+          >
+            <div class="choice">{{ value }}</div>
+            <div class="tally">{{ key }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -162,15 +168,24 @@ export default {
   display: flex;
   padding: 40px 0px;
 }
+.choiceDisplay {
+  display: flex;
+  flex-wrap: wrap;
+}
 .issueCard {
   display: inline-block;
   width: 100%;
   max-width: 300px;
   min-height: 300px;
   box-shadow: 0 0 5px 0 grey;
-  padding: 1rem;
+  padding: 20px;
   margin: 1rem;
   box-sizing: border-box;
+}
+.issueCount {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 ul {
@@ -184,6 +199,10 @@ li {
 .choicebox {
   display: flex;
   text-align: left;
+}
+.choice-titles {
+  opacity: 0.5;
+  padding-bottom: 10px;
 }
 .choice {
   flex: 1;
