@@ -1,17 +1,24 @@
 <template>
   <section>
     <div>Issues: {{ issueCount }}</div>
-    <div v-for="(issue, id) in issueList" :key="id" class="issueCard">
+    <div
+      v-for="(issue, id) in issueList"
+      :key="id"
+      class="issueCard"
+      :data-id="id"
+    >
       <div class="title">{{ issue.title }}</div>
-      <ul>
-        <li
-          v-for="(choice, i) in issue.choices"
-          :key="i"
-          @click="castVote(choice, id)"
+      <div class="choices">
+        <div
+          class="choicebox"
+          v-for="(key, value) in issue.choices"
+          :key="value"
+          @click="castVote($event, value)"
         >
-          {{ choice }}
-        </li>
-      </ul>
+          <div class="choice">{{ value }}</div>
+          <div class="tally">{{ key }}</div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -85,25 +92,29 @@ export default {
       if (typeof data === "object") {
         data.forEach((choice, index) => {
           let choiceAr = this.utils.toUtf8(choice).split(",");
-          this.issueList[index].choices = choiceAr;
+          //this.issueList[index].choices = choiceAr;
+          choiceAr.forEach(c => {
+            if (this.issueList[index].choices === undefined) {
+              this.issueList[index].choices = new Object();
+            }
+            if (
+              this.issueList[index].choices[c] === null ||
+              this.issueList[index].choices[c] > 0
+            )
+              return;
+            this.issueList[index].choices[c] = 0;
+          });
         });
       }
     },
     votes(data) {
-      console.log(data);
       if (typeof data === "object") {
         let ids = data[0];
         let choices = data[2];
 
         for (let i = 0; i < ids.length; i++) {
-          if (this.issueList[ids[i]].votes === undefined) {
-            this.issueList[ids[i]].votes = new Object();
-          }
           let choice = this.utils.toUtf8(choices[i]);
-          if (this.issueList[ids[i]].votes[choice] === undefined) {
-            this.issueList[ids[i]].votes[choice] = 0;
-          }
-          this.issueList[ids[i]].votes[choice] += 1;
+          this.issueList[ids[i]].choices[choice] += 1;
         }
       }
     }
@@ -117,10 +128,13 @@ export default {
       };
       this.$store.dispatch("drizzle/REGISTER_CONTRACT", contractData);
     },
-    castVote(choice, issueId) {
-      const convertedChoice = this.utils.toHex(choice);
+    castVote(event, value) {
+      const id = event.target.parentElement.parentElement.parentElement.getAttribute(
+        "data-id"
+      );
+      const convertedChoice = this.utils.toHex(value);
       // Construct arguments
-      const sendArgs = [convertedChoice, issueId];
+      const sendArgs = [convertedChoice, id];
       // Send
       this.drizzleInstance.contracts[this.contractName].methods[
         "castVote"
@@ -131,7 +145,6 @@ export default {
     this.registerContract("Issues", "getIssueCount", "");
     this.registerContract("Issues", "getIssues", "");
     this.registerContract("Issues", "getChoices", "");
-    this.registerContract("Issues", "getVotes", "");
     this.registerContract("Issues", "getVotes", "");
   }
 };
@@ -163,8 +176,20 @@ ul,
 li {
   list-style: none;
 }
-li:hover {
+
+.choicebox {
+  display: flex;
+  text-align: left;
+}
+.choice {
+  flex: 1;
+}
+.choice:hover {
   color: blue;
   cursor: pointer;
+}
+.tally {
+  min-width: 40px;
+  justify-self: right;
 }
 </style>
