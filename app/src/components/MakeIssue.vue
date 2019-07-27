@@ -140,12 +140,20 @@ h2 {
   justify-content: center;
 }
 
+.left, .right {
+  margin: 10px;
+}
+
 .right {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  border-radius: 4px;
+  border-color: #dbdbdb;
+  background-color: #fff;
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 }
 .choiceBg {
   position: absolute;
@@ -153,7 +161,7 @@ h2 {
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   font-size: 2.5em;
-  color: rgba(100, 48, 150, 0.5);
+  color: rgba(100, 48, 150, 0.1);
   font-weight: bold;
 }
 input[type="text"] {
@@ -188,7 +196,7 @@ textarea {
   flex-direction: column;
   text-align: center;
   margin: 0 auto;
-  color: #fff;
+  color: #000;
   position: relative;
   z-index: 1;
   font-size: 1.2em;
@@ -210,7 +218,8 @@ textarea {
     grid-template-columns: 1fr;
   }
   .right {
-    min-height: 200px;
+    min-height: 300px;
+    margin-top: 60px;
   }
 }
 </style>
