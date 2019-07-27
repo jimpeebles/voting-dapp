@@ -140,7 +140,8 @@ h2 {
   justify-content: center;
 }
 
-.left, .right {
+.left,
+.right {
   margin: 10px;
 }
 
