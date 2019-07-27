@@ -177,6 +177,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  padding-bottom: 60px;
 }
 .issueCard {
   display: inline-block;
